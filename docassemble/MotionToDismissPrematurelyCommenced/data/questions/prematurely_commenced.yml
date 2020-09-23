@@ -1,0 +1,188 @@
+comment: |
+  The metadata section controls the tab title and saved interview title. You can delete this section if you include this YAML file in another YAML file.
+metadata:
+  title: |
+    Motion to Dismiss - Case Prematurely Commenced
+  short title: |
+    Prematurely Commenced
+---
+comment: |
+  This section is used by MAVirtualCourts to control how some of the questions work.
+mandatory: True
+code: |
+  interview_metadata # make sure we initialize the object
+  if not defined("interview_metadata['prematurely_commenced']"):
+    interview_metadata.initializeObject('prematurely_commenced')
+  interview_metadata['prematurely_commenced'].update({
+    'title': 'Motion to Dismiss - Case Prematurely Commenced',
+    'short title': 'Prematurely Commenced',
+    'description': 'This form will help you create a Motion to Dismiss for a case that started prematurely. If you were served papers that evict you without proper notice and process, you may qualify for a Motion to Dismiss on the basis that the case was started without following the proper eviction guidelines.',
+    'original_form': 'hi',
+    'allowed courts': [
+      'Boston Municipal Court',
+      'District Court',
+      'Housing Court',
+      'Superior Court',
+    ],
+    'categories': [
+      'Housing',
+    ],
+    'logic block variable': 'prematurely_commenced',
+    'attachment block variable': 'prematurely_commenced_attachment',
+    'typical role': 'defendant',
+  })
+---
+include:
+  - docassemble.MAVirtualCourt:basic-questions.yml
+---
+features:
+  navigation: True
+---
+sections:
+  - review_prematurely_commenced: Review your answers
+---
+id: interview_order_prematurely_commenced
+code: |
+  # This is a placeholder to control logic flow in this interview
+  user_role = "defendant"
+  other_parties.ask_number = True 
+  other_parties.target_number = 1
+  basic_questions_intro_screen 
+  prematurely_commenced_intro
+  # Set the preferred/allowed courts for this interview
+  allowed_courts = interview_metadata["prematurely_commenced"]["allowed courts"]
+  nav.set_section('review_prematurely_commenced')
+  plaintiff
+  termination_date
+  users[0]
+  users[0].address.address
+  users[0].email
+  users[0].phone_number
+  courts[0]
+  #courts[0].county
+  prematurely_commenced_preview_question # Pre-canned preview screen
+  basic_questions_signature_flow
+  users[0].signature
+  prematurely_commenced = True
+---
+comment: |
+  This question is used to introduce your interview. Please customize
+id: Motion to Dismiss - Case Prematurely Commenced
+continue button field: prematurely_commenced_intro
+question: |
+  Motion to Dismiss - Case Prematurely Commenced
+subquestion: |
+  This form will help you create a Motion to Dismiss for a case that started prematurely. If you were served papers that evict you without proper notice and process, you may qualify for a Motion to Dismiss on the basis that the case was started without following the proper eviction guidelines.
+---
+id: Placeholder preview screen
+continue button field: prematurely_commenced_preview_question
+question: |
+  Placeholder preview screen
+subquestion: |
+  Here is a preview of the form you'll sign on the next page. 
+  
+   ${prematurely_commenced_attachment['preview']}
+---
+id: Landlord Name
+question:  |
+  Who is your landlord? 
+subquestion:  |
+  Write your landlord's name exactly the same way as it is
+  written on your court paperwork.
+  See Example Below. 
+  
+  [FILE landlord_name.jpeg_.jpg, 100%]
+fields:   
+  - Full name of landlord: other_parties[0].name.first
+---
+id: Take out your Notice to Quit and Summons and Complaint
+question: |
+  Take out your Notice to Quit and Summons and Complaint
+subquestion: |
+  Fill out the following questions with the dates from your Notice to Quit and your Summons and Complaint.
+fields:
+  - 'What date does your Notice to Quit claim to terminate your tenancy?': termination_date
+    datatype: date
+  - 'What date were you served the Notice to Quit?': service_date
+    datatype: date
+  - 'What date were you served the Summons and Complaint?': commenced_date
+    datatype: date
+---
+---
+progress: 100
+mandatory: True
+id: Placeholder download screen
+question: |
+  Placeholder download screen
+subquestion: |
+  Placeholder
+  
+  ### Next steps
+  
+  1. Step 1
+  1. Step 2
+  
+  Below is a preview of your form.
+  
+  ${prematurely_commenced_attachment['final'] }
+need: prematurely_commenced
+attachment code: prematurely_commenced_attachment['final']
+---
+objects:
+  - prematurely_commenced_attachment: DADict
+---
+attachment:
+    variable name: prematurely_commenced_attachment[i]
+    name: Prematurely Commenced
+    filename: Prematurely_Commenced
+    docx template file: prematurely_commenced-7.docx
+---
+id: prematurely_commenced review screen
+event: review_prematurely_commenced
+question: |
+  Placeholder Review Screen
+subquestion: |
+  Edit your answers below
+review: 
+  - Edit: termination_date
+    button: |
+      Date notice to quit purports termination of tenancy:
+      ${ termination_date.format() }
+  - Edit: service_date
+    button: |
+      Date you were served notice to quit:
+      ${ service_date.format() }
+  - Edit: plaintiffs
+    button: |
+      Plaintiff:
+      ${ plaintiffs }
+  - Edit: defendants
+    button: |
+      Defendant:
+      ${ defendants }
+  - Edit: commenced_date
+    button: |
+      Date you were served summons and complaint:
+      ${ commenced_date.format() }
+  - Edit: users[0].name.first
+    button: |
+      users[0]:
+      ${ users[0] }
+  - Edit: users[0].address.address
+    button: |
+      users[0].address.address:
+      ${ users[0].address.address }
+  - Edit: users[0].email
+    button: |
+      users[0].email:
+      ${ users[0].email }
+  - Edit: users[0].signature
+    button: |
+      users[0].signature:
+      ${ users[0].signature }
+  - Edit: users[0].phone_number
+    button: |
+      users[0].phone_number:
+      ${ users[0].phone_number }
+  
+ 
