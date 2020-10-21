@@ -135,7 +135,7 @@ attachment:
     variable name: prematurely_commenced_attachment[i]
     name: Prematurely Commenced
     filename: Prematurely_Commenced
-    docx template file: prematurely_commenced-7.docx
+    docx template file: prematurely_commenced.docx
 ---
 id: prematurely_commenced review screen
 event: review_prematurely_commenced
@@ -186,3 +186,4 @@ review:
       ${ users[0].phone_number }
   
  
+
