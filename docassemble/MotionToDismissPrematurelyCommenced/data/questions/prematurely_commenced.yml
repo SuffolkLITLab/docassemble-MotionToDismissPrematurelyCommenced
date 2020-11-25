@@ -16,7 +16,7 @@ code: |
   interview_metadata['prematurely_commenced'].update({
     'title': 'Motion to Dismiss - Case Prematurely Commenced',
     'short title': 'Prematurely Commenced',
-    'description': 'This form will help you create a Motion to Dismiss for a case that started prematurely. If you were served papers that evict you without proper notice and process, you may qualify for a Motion to Dismiss on the basis that the case was started without following the proper eviction guidelines.',
+    'description': 'This form will help you create a Motion to Dismiss for a case that started prematurely. **Use this form if your landlord is taking you to court to evict you, if you did not receive the Notice To Quit or Notice to Terminate Your Tenancy or 30 or 14 day notice.** If you were served papers that start the eviction process without proper notice and process, you may qualify for a Motion to Dismiss on the basis that the case was started without following the proper eviction guidelines.',
     'original_form': 'hi',
     'allowed courts': [
       'Boston Municipal Court',
@@ -75,7 +75,7 @@ continue button field: prematurely_commenced_intro
 question: |
   Motion to Dismiss - Case Prematurely Commenced
 subquestion: |
-  This form will help you create a Motion to Dismiss for a case that started prematurely. If you were served papers that evict you without proper notice and process, you may qualify for a Motion to Dismiss on the basis that the case was started without following the proper eviction guidelines.
+  This form will help you create a Motion to Dismiss for a case that started prematurely. **Use this form if your landlord is taking you to court to evict you, if you did not receive the Notice To Quit or Notice to Terminate Your Tenancy or 30 or 14 day notice.** If you were served papers that start the eviction process without proper notice and process, you may qualify for a Motion to Dismiss on the basis that the case was started without following the proper eviction guidelines.
 ---
 id: Docket Number
 question: |
