@@ -49,16 +49,19 @@ code: |
   other_parties.target_number = 1
   basic_questions_intro_screen 
   prematurely_commenced_intro
+  str(defendants)
+  users[0]
+  users[0].address.address
+  users[0].email
+  users[0].phone_number
+  users[0].other_contact_method
   # Set the preferred/allowed courts for this interview
   allowed_courts = interview_metadata["prematurely_commenced"]["allowed courts"]
   nav.set_section('review_prematurely_commenced')
   plaintiff
   termination_date
-  users[0]
-  users[0].address.address
-  users[0].email
-  users[0].phone_number
   courts[0]
+  dont_know_docket_number
   #courts[0].county
   prematurely_commenced_preview_question # Pre-canned preview screen
   basic_questions_signature_flow
@@ -73,6 +76,17 @@ question: |
   Motion to Dismiss - Case Prematurely Commenced
 subquestion: |
   This form will help you create a Motion to Dismiss for a case that started prematurely. If you were served papers that evict you without proper notice and process, you may qualify for a Motion to Dismiss on the basis that the case was started without following the proper eviction guidelines.
+---
+id: Docket Number
+question: |
+  What is your docket number?
+fields:
+  - Docket number: docket_number
+    hide if: dont_know_docket_number
+  - I do not know: dont_know_docket_number
+    datatype: yesno
+validation code: |
+  if dont_know_docket_number: docket_number = ' '
 ---
 id: Placeholder preview screen
 continue button field: prematurely_commenced_preview_question
@@ -184,6 +198,3 @@ review:
     button: |
       users[0].phone_number:
       ${ users[0].phone_number }
-  
- 
-
