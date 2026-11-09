@@ -105,7 +105,7 @@ subquestion:  |
   written on your court paperwork.
   See Example Below. 
   
-  [FILE landlord_name.jpeg_.jpg, 100%]
+  [FILE landlord_name.jpeg_.jpg, 100%, The landlords name is at the end of the paragraph that starts with 'You are hereby summonsed to appear at a hearing before a Judge of the Court at the time and place listed below:']
 fields:   
   - Full name of landlord: other_parties[0].name.first
 ---
